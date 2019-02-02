@@ -33,9 +33,9 @@ spec:
           - name: GREMLIN_TEAM_ID
             value: 5d62b77e-aa0c-5622-b507-1d4efee4372b
           - name: GREMLIN_TEAM_PRIVATE_KEY_OR_FILE
-            value: ~/gremlin/gremlin.cert
+            value: file:///var/lib/gremlin/cert/gremlin.key
           - name: GREMLIN_TEAM_CERTIFICATE_OR_FILE
-            value: ~/gremlin/gremlin.key
+            value: file:///var/lib/gremlin/cert/gremlin.cert 
           - name: GREMLIN_IDENTIFIER
             valueFrom:
               fieldRef:
