@@ -214,6 +214,12 @@ spec:
       containers:
       - name: front-end
         image: weaveworksdemos/front-end:0.3.12
+        env:
+        - name: LD_PRELOAD
+          value: /opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so
+        volumeMounts:
+        - mountPath: /opt/dynatrace/oneagent
+          name: oneagent
         resources:
           requests:
             cpu: 100m
@@ -229,6 +235,29 @@ spec:
           readOnlyRootFilesystem: true
       nodeSelector:
         beta.kubernetes.io/os: linux
+      # initContainer to download OneAgent
+      initContainers:
+      - name: install-oneagent
+        image: alpine:3.8
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - ARCHIVE=$(mktemp) && wget -O $ARCHIVE "$DT_API_URL/v1/deployment/installer/agent/unix/paas/latest?Api-Token=$DT_PAAS_TOKEN&$DT_ONEAGENT_OPTIONS" && unzip -o -d /opt/dynatrace/oneagent $ARCHIVE && rm -f $ARCHIVE
+        env:
+        - name: DT_API_URL
+          value: https://dng60157.live.dynatrace.com/api
+        - name: DT_PAAS_TOKEN
+          value: <paastoken>
+        - name: DT_ONEAGENT_OPTIONS
+          value: flavor=default&include=all
+        volumeMounts:
+        - mountPath: /opt/dynatrace/oneagent
+          name: oneagent
+      # Make OneAgent available as a volume
+        volumes:
+        - name: oneagent
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
