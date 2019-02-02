@@ -1,0 +1,40 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: oneagent
+  labels:
+    name: oneagent
+  namespace: sock-shop
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: oneagent
+    spec:
+
+# initContainer to download OneAgent
+      initContainers:
+      - name: install-oneagent
+        image: alpine:3.8
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - ARCHIVE=$(mktemp) && wget -O $ARCHIVE "$DT_API_URL/v1/deployment/installer/agent/unix/paas/latest?Api-Token=$DT_PAAS_TOKEN&$DT_ONEAGENT_OPTIONS" && unzip -o -d /opt/dynatrace/oneagent $ARCHIVE && rm -f $ARCHIVE
+        env:
+        - name: DT_API_URL
+          value: https://<Your-environment-ID>.live.dynatrace.com/api
+        - name: DT_PAAS_TOKEN
+          value: <paastoken>
+        - name: DT_ONEAGENT_OPTIONS
+          value: flavor=<FLAVOR>&include=<TECHNOLOGY>
+        volumeMounts:
+        - mountPath: /opt/dynatrace/oneagent
+          name: oneagent
+
+# Make OneAgent available as a volume
+      volumes:
+      - name: oneagent
+        emptyDir: {}

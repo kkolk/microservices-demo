@@ -6,7 +6,7 @@ metadata:
     name: carts-db
   namespace: sock-shop
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -60,7 +60,7 @@ metadata:
     name: carts
   namespace: sock-shop
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -118,7 +118,7 @@ metadata:
     name: catalogue-db
   namespace: sock-shop
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -161,7 +161,7 @@ metadata:
     name: catalogue
   namespace: sock-shop
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -205,7 +205,7 @@ metadata:
   name: front-end
   namespace: sock-shop
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -254,7 +254,7 @@ metadata:
     name: orders-db
   namespace: sock-shop
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -308,7 +308,7 @@ metadata:
     name: orders
   namespace: sock-shop
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -366,7 +366,7 @@ metadata:
     name: payment
   namespace: sock-shop
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -412,7 +412,7 @@ metadata:
     name: queue-master
   namespace: sock-shop
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -451,7 +451,7 @@ metadata:
     name: rabbitmq
   namespace: sock-shop
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -498,7 +498,7 @@ metadata:
     name: shipping
   namespace: sock-shop
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -556,7 +556,7 @@ metadata:
     name: user-db
   namespace: sock-shop
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -610,7 +610,7 @@ metadata:
     name: user
   namespace: sock-shop
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
